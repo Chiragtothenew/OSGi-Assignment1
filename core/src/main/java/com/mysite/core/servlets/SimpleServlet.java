@@ -21,7 +21,6 @@ import com.mysite.core.services.ConfigurationService;
 import java.util.Arrays;
 import java.util.List;
 
-import com.mysite.core.services.StudentClassService;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
@@ -50,7 +49,7 @@ public class SimpleServlet extends SlingSafeMethodsServlet {
 
     @Reference
     private ConfigurationService studentClassValidatorService;
-    private StudentClassService studentClassService;
+
 
     @Override
     protected void doGet(final SlingHttpServletRequest req,
