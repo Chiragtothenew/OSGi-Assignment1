@@ -21,6 +21,8 @@ import com.mysite.core.services.ConfigurationService;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mysite.core.services.Student;
+import com.mysite.core.services.StudentClassService;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
@@ -44,11 +46,23 @@ import java.io.IOException;
 @SlingServletPaths(value = "/bin/myservlet")
 public class SimpleServlet extends SlingSafeMethodsServlet {
 
-// private static final long serialVersionUID = 1L;
-// private static List l;
+//private static final long serialVersionUID = 1L;
+//private static List l;
 
     @Reference
-    private ConfigurationService studentClassValidatorService;
+    private ConfigurationService configurationService;
+
+    @Reference
+    private StudentClassService studentClassService;
+
+    @Override
+    public void init() throws ServletException{
+
+        studentClassService.addStudent(new Student(1,100,"Chirag"));
+        studentClassService.addStudent(new Student(2,90,"Swastik"));
+        studentClassService.addStudent(new Student(3,80,"Manya"));
+
+    }
 
 
     @Override
@@ -56,6 +70,9 @@ public class SimpleServlet extends SlingSafeMethodsServlet {
                          final SlingHttpServletResponse resp) throws ServletException, IOException {
         int a = Integer.parseInt(req.getParameter("action"));
         List l = Arrays.asList(req.getParameterValues("list"));
-        resp.getWriter().write("A = " + studentClassValidatorService.isClassLimitReached(l) + " marks = " + studentClassValidatorService.getPassMarks(a));
+        int id = Integer.parseInt(req.getParameter("id"));
+        resp.getWriter().write("A = " + configurationService.isClassLimitReached(l) + " marks = " + configurationService.getPassMarks(a));
+        resp.getWriter().println("Is Student Passed : "+studentClassService.isStudentPassed(id));
+
     }
 }

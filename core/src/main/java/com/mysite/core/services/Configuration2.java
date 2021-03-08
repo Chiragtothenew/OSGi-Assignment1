@@ -6,14 +6,8 @@ import org.osgi.service.metatype.annotations.AttributeType;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 
 @ObjectClassDefinition(name="ConfigurationService Service Configuration")
-public @interface Configuration {
+public @interface Configuration2 {
 
-
-    @AttributeDefinition(name = "Students Allowed ", type = AttributeType.INTEGER)
-    int StuAll() default 10;
-
-    @AttributeDefinition(name = "Marks ", type = AttributeType.INTEGER)
-    int PassMarks() default 40;
 
 
 }
